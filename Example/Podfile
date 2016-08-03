@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'FlexiblePathMenu_Example' do
+  pod 'FlexiblePathMenu', :path => '../'
+
+  target 'FlexiblePathMenu_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
