@@ -1,0 +1,6 @@
+framework module FlexiblePathMenu {
+  umbrella header "FlexiblePathMenu-umbrella.h"
+
+  export *
+  module * { export * }
+}

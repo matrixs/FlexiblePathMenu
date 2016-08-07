@@ -47,6 +47,7 @@
 		797D77CDBE4CECC982B66768 /* Pods-FlexiblePathMenu_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FlexiblePathMenu_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FlexiblePathMenu_Tests/Pods-FlexiblePathMenu_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		892A0A0C37DE34904A290208 /* Pods_FlexiblePathMenu_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlexiblePathMenu_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8090ADB7A45DB7C32ECB75 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		E216BADD1D520C6D000C0E2B /* FlexiblePathMenu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlexiblePathMenu.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/FlexiblePathMenu-hgcmzjphscernnbaxefrzvclazpx/Build/Products/Debug-iphonesimulator/FlexiblePathMenu/FlexiblePathMenu.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +143,7 @@
 		ABFCCA0B668C02F27937FE5F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E216BADD1D520C6D000C0E2B /* FlexiblePathMenu.framework */,
 				892A0A0C37DE34904A290208 /* Pods_FlexiblePathMenu_Example.framework */,
 				6077BB340FE6062F7E5E8E6D /* Pods_FlexiblePathMenu_Tests.framework */,
 			);
@@ -490,6 +492,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlexiblePathMenu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -503,6 +506,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FlexiblePathMenu/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";

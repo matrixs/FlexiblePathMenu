@@ -1,0 +1,6 @@
+framework module Pods_FlexiblePathMenu_Example {
+  umbrella header "Pods-FlexiblePathMenu_Example-umbrella.h"
+
+  export *
+  module * { export * }
+}

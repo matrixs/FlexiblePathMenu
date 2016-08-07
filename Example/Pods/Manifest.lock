@@ -1,0 +1,16 @@
+PODS:
+  - FlexiblePathMenu (0.1.0)
+
+DEPENDENCIES:
+  - FlexiblePathMenu (from `../`)
+
+EXTERNAL SOURCES:
+  FlexiblePathMenu:
+    :path: ../
+
+SPEC CHECKSUMS:
+  FlexiblePathMenu: 73e1296b6c1cefa16e2f612fdb0781ddd6f60434
+
+PODFILE CHECKSUM: 02fa6aea924cbc6a1f216d77a23d3c054a023293
+
+COCOAPODS: 1.0.0
