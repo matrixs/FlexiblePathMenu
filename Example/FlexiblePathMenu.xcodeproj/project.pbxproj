@@ -15,6 +15,7 @@
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		90279CA818A1E17E368D8CFD /* Pods_FlexiblePathMenu_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 892A0A0C37DE34904A290208 /* Pods_FlexiblePathMenu_Example.framework */; };
 		C80CA35CC84383B075441D2B /* Pods_FlexiblePathMenu_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6077BB340FE6062F7E5E8E6D /* Pods_FlexiblePathMenu_Tests.framework */; };
+		E2CF98711D6807850088ACD5 /* demo.gif in Resources */ = {isa = PBXBuildFile; fileRef = E2CF98701D6807850088ACD5 /* demo.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		892A0A0C37DE34904A290208 /* Pods_FlexiblePathMenu_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FlexiblePathMenu_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8090ADB7A45DB7C32ECB75 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		E216BADD1D520C6D000C0E2B /* FlexiblePathMenu.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FlexiblePathMenu.framework; path = "../../../../../Library/Developer/Xcode/DerivedData/FlexiblePathMenu-hgcmzjphscernnbaxefrzvclazpx/Build/Products/Debug-iphonesimulator/FlexiblePathMenu/FlexiblePathMenu.framework"; sourceTree = "<group>"; };
+		E2CF98701D6807850088ACD5 /* demo.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = demo.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 				659EB81FCBF34CADF6A9C9A7 /* FlexiblePathMenu.podspec */,
 				8C8090ADB7A45DB7C32ECB75 /* README.md */,
 				70E0E3C50BD801B9AADC3F28 /* LICENSE */,
+				E2CF98701D6807850088ACD5 /* demo.gif */,
 			);
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
+				E2CF98711D6807850088ACD5 /* demo.gif in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
 			);
