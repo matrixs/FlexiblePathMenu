@@ -17,7 +17,7 @@ pod "FlexiblePathMenu", :git=> 'https://github.com/matrixs/FlexiblePathMenu.git'
 
 ##Visual Effect
 
-![](./demo.gif)
+![](./Example/demo.gif)
 
 ## Author
 
