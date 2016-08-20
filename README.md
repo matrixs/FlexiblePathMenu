@@ -15,6 +15,10 @@ it, simply add the following line to your Podfile:
 pod "FlexiblePathMenu", :git=> 'https://github.com/matrixs/FlexiblePathMenu.git'
 ```
 
+##Visual Effect
+
+![](/demo.gif)
+
 ## Author
 
 matrixs, 363986099@qq.com
