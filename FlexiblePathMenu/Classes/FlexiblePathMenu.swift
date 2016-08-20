@@ -51,22 +51,24 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    public var draggable: Bool {
-        set {
-            centerView.addGestureRecognizer(panGesture)
-        }
-        get {
-            return draggable
+    public var draggable: Bool = false {
+        didSet {
+            if draggable {
+                centerView.addGestureRecognizer(panGesture)
+            } else {
+                centerView.removeGestureRecognizer(panGesture)
+            }
         }
     }
     
-    public var scrollable: Bool {
-        set {
-            dialGesture = UIPanGestureRecognizer(target: self, action: #selector(handleDialGesture))
-            containerViewForAnimation.addGestureRecognizer(dialGesture)
-        }
-        get {
-            return scrollable
+    public var scrollable: Bool = false {
+        didSet {
+            if scrollable {
+                dialGesture = UIPanGestureRecognizer(target: self, action: #selector(handleDialGesture))
+                containerViewForAnimation.addGestureRecognizer(dialGesture)
+            } else {
+                containerViewForAnimation.removeGestureRecognizer(dialGesture)
+            }
         }
     }
     
@@ -98,22 +100,14 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
         didSet {
             scrollStartArc = normalize(CGFloat(scrollStartArc))
             scrollStartBoundaryArc = scrollStartArc - normalize(atan2(maxItemWidth/2, menuRadius - maxItemHeight/2))
-            if abs(scrollStartArc - scrollEndArc) >= M_PI*2 {
-                scrollableOfWholeCircle = true
-            } else {
-                scrollableOfWholeCircle = false
-            }
+            scrollableOfWholeCircle = false
         }
     }
     public var scrollEndArc: Double = M_PI*2 {
         didSet {
             scrollEndArc = normalize(CGFloat(scrollEndArc))
             scrollEndBoundaryArc = scrollEndArc + normalize(atan2(maxItemWidth/2, menuRadius - maxItemHeight/2))
-            if abs(scrollStartArc - scrollEndArc) >= M_PI*2 {
-                scrollableOfWholeCircle = true
-            } else {
-                scrollableOfWholeCircle = false
-            }
+            scrollableOfWholeCircle = false
         }
     }
     private var scrollStartBoundaryArc: Double = 0
@@ -209,7 +203,12 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
         
         let point = point2Angle(gesture.locationInView(self))
         if !scrollableOfWholeCircle {
-            let rad = normalize(point)
+            var rad = normalize(point)
+            if rad*scrollStartBoundaryArc < 0 {
+                if rad < 0 {
+                    rad += M_PI*2
+                }
+            }
             if rad < scrollStartBoundaryArc || rad > scrollEndBoundaryArc {
                 if gesture.state == .Began {
                     receiveTouch = false
@@ -224,7 +223,7 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
             if !receiveTouch {
                 return
             }
-            var angle = CGFloat(normalize(point)) - CGFloat(normalize(beginAngle))
+            let angle = CGFloat(normalize(point)) - CGFloat(normalize(beginAngle))
             containerViewForAnimation.transform = CGAffineTransformRotate(containerViewForAnimation.transform, angle)
             itemViews.forEach({ (view) in
                 view.transform = CGAffineTransformRotate(view.transform, -angle)
@@ -256,8 +255,8 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
     }
     
     private func normalize(angle: CGFloat) -> Double {
-        var rad = Double(angle)%(M_PI*2)
-        return rad > 0 ? rad : (rad + M_PI*2)
+        let rad = Double(angle)%(M_PI*2)
+        return rad
     }
     
     @objc private func handleTapGesture(gesture: UITapGestureRecognizer) {
@@ -314,7 +313,9 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc private func click(gestureRecognizer: UITapGestureRecognizer) {
-        shrinkMenu()
+        if expandableState {
+            shrinkMenu()
+        }
         if let view = gestureRecognizer.view {
             clickDelegate?.clickAt?(view)
         }
@@ -345,6 +346,7 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
     public func shrinkMenu() {
         animationComplete = false
         expandableState = false
+        clickDelegate?.menuStatus?(expandableState)
         switch itemViewAniamtionType {
         case .RotateEquation:
             for (index, view) in itemViews.enumerate() {
@@ -359,7 +361,7 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
                 addRotateAnimaton(itemViews[0], state: .Shrink)
                 addTranslationAnimation(itemViews[0], index: 0, state: .Shrink)
             } else {
-                var interval = fpmTimingFunction.valueForX(CGFloat(itemViewAnimationDuration)/CGFloat(itemViews.count - 1))
+                let interval = fpmTimingFunction.valueForX(CGFloat(itemViewAnimationDuration)/CGFloat(itemViews.count - 1))
                 for (index, view) in itemViews.enumerate() {
                     let time = CGFloat(index)*interval
                     executeAfter(Double(time), action: { [weak self] in
@@ -377,6 +379,7 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
     public func expandMenu() {
         animationComplete = false
         expandableState = true
+        clickDelegate?.menuStatus?(expandableState)
         switch itemViewAniamtionType {
         case .RotateEquation:
             for (index, view) in itemViews.enumerate() {
@@ -391,7 +394,7 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
                 addRotateAnimaton(itemViews[0], state: .Expand)
                 addTranslationAnimation(itemViews[0], index: 0, state: .Expand)
             } else {
-                var interval = fpmTimingFunction.valueForX(CGFloat(itemViewAnimationDuration)/CGFloat(itemViews.count - 1))
+                let interval = fpmTimingFunction.valueForX(CGFloat(itemViewAnimationDuration)/CGFloat(itemViews.count - 1))
                 for (index, view) in itemViews.enumerate() {
                     let time = CGFloat(index)*interval
                     executeAfter(Double(time), action: { [weak self] in
@@ -484,4 +487,5 @@ public class FlexiblePathMenu: UIView, UIGestureRecognizerDelegate {
 
 @objc public protocol FPMItemsViewClickDelegate: NSObjectProtocol {
     optional func clickAt(view: UIView)
+    optional func menuStatus(expand: Bool)
 }
